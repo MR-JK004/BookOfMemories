@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <style>
+        #main{
+            position: relative; overflow: hidden;
+        }
+        img{
+            width: 100%;
+        }
+        #book{
+            position: absolute; top: 50%; left: 51%; transform: translate(-50%, -50%);
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            font-style: normal;
+            font-size: 50px;
+            transform: translate(-50%, -50%) rotate(-5deg);
+            text-align: center;
+            margin-top:-30px;
+            margin-left: 15px;
+            color:goldenrod;
+        }
+
+        a:hover{
+            color: gold;
+            cursor: pointer;
+            text-shadow: 0 0 20px gold;
+            animation: flash 0.5s ease-in;
+        }
+
+        @keyframes flash {
+            0%, 50%, 100% {
+                opacity: 1;
+            }
+            25%, 75% {
+                opacity: 0;
+            }
+        }
+
+        #batch{
+            position: absolute; top: 86%; left: 54%; transform: translate(-50%, -50%);
+            color: white;
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            font-style: normal;
+            font-size: 20px;
+            transform: translate(-50%, -50%) rotate(-4.5deg);
+            text-align: center;
+            margin-top:-30px;
+            margin-left: 15px;
+        }
+
+        a{
+            text-decoration: none;
+            color: goldenrod;
+        }
+    </style>
+
+
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <div id="main">
+        <img src="images/book.jpeg" usemap="#image-map">
+        <p id="book"><a href="book.html">Book of<br>Memories</a></p>
+
+        <p id="batch">Batch 2k20 - 2k24</p>
+        <map name="image-map">
+            <area target="" alt="Book of Memories" title="" href="book.html" coords="542,99,556,172,663,800,1118,763,960,99" shape="poly">
+        </map>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                    title: 'Your Junior Request!!',
+                    text: 'Click on the Book of Memories',
+                    icon: 'info',
+                    confirmButtonText: 'OK'
+                });
+            });
+
+        window.addEventListener('dblclick', function() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
