@@ -1,32 +1,32 @@
 //Page turning Effect
-$(function() {
-    var $mybook 		= $('#mybook');
-    var $bttn_next		= $('');
-    var $bttn_prev		= $('');
-    var $loading		= $('#loading');
-    var $mybook_images	= $mybook.find('img');
-    var cnt_images		= $mybook_images.length;
-    var loaded			= 0;
-     
-    $mybook_images.each(function(){
-        var $img 	= $(this);
-        var source	= $img.attr('src');
-        $('<img/>').load(function(){
+$(function () {
+    var $mybook = $('#mybook');
+    var $bttn_next = $('');
+    var $bttn_prev = $('');
+    var $loading = $('#loading');
+    var $mybook_images = $mybook.find('img');
+    var cnt_images = $mybook_images.length;
+    var loaded = 0;
+
+    $mybook_images.each(function () {
+        var $img = $(this);
+        var source = $img.attr('src');
+        $('<img/>').load(function () {
             ++loaded;
-            if(loaded == cnt_images){
+            if (loaded == cnt_images) {
                 $loading.hide();
                 $mybook.show().booklet({
-                    name:               null,                           
-                    width:              1400,                            
-                    height:             800,                             
-                    speed:              600,                            
-                    direction:          'LTR',                           
-                    next:               $bttn_next,          			  
-                    prev:               $bttn_prev,
+                    name: null,
+                    width: 1400,
+                    height: 800,
+                    speed: 600,
+                    direction: 'LTR',
+                    next: $bttn_next,
+                    prev: $bttn_prev,
                 });
                 Cufon.refresh();
             }
-        }).attr('src',source);
+        }).attr('src', source);
     });
 });
 
@@ -44,13 +44,13 @@ function enterFullScreen() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     Swal.fire({
         title: 'Your Junior Requests!!!',
         html: '<div>Enter FullScreen and Enjoy the Immersive Experience</div>',
         showCancelButton: false,
         confirmButtonText: 'Enter Fullscreen',
-        allowOutsideClick: false, 
+        allowOutsideClick: false,
         allowEscapeKey: false
     }).then((result) => {
         if (result.isConfirmed) {
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 //Emoji Rain
-const emojis = ["😇", "😊", "😂", "😍", "😜", "🥰","❤️","💙","💔"]; 
+const emojis = ["😇", "😊", "😂", "😍", "😜", "🥰", "❤️", "💙", "💔"];
 const rainContainer = document.querySelector('#page1');
 const rainContainer1 = document.querySelector('#page2');
 
@@ -90,9 +90,9 @@ setInterval(() => {
 const audio = document.getElementById('myAudio');
 
 // Event listener for keydown event
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
     // Check the key code
-    switch(event.key) {
+    switch (event.key) {
         case 'm':
             if (audio.paused) {
                 audio.play();
@@ -100,7 +100,7 @@ document.addEventListener('keydown', function(event) {
                 audio.pause();
             }
             break;
-        
+
         default:
             break;
     }
@@ -108,49 +108,55 @@ document.addEventListener('keydown', function(event) {
 
 //video
 
-var isPlaying = false;
+let player;
 
-document.addEventListener('keydown', function(event) {
-    // Check if the key pressed is 'K' (case insensitive)
-    if (event.key.toUpperCase() === 'P') {
-        var video = document.getElementById('fenix');
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+        height: '360',
+        width: '640',
+        videoId: '0z7TlIPuTIU', // Replace with your video ID
+        events: {
+            'onReady': onPlayerReady,
+        }
+    });
+}
 
-        if (isPlaying) {
-            video.pause();
-        } else {
-            video.play();
+function onPlayerReady(event) {
+    document.addEventListener('keydown', function (event) {
+        // Listen for the 'k' key to play/pause the video
+        if (event.key === 'k' || event.key === 'K') {
+            const playerState = player.getPlayerState();
+            if (playerState === YT.PlayerState.PAUSED || playerState === YT.PlayerState.ENDED) {
+                player.playVideo();
+            } else {
+                player.pauseVideo();
+            }
         }
 
-        // Update the playback state
-        isPlaying = !isPlaying;
-    }
-});
-
-
-//video
-const video = document.getElementById('myVideo');
-
-// Event listener for keydown event
-document.addEventListener('keydown', function(event) {
-    // Check the key code
-    switch(event.key) {
-        case 'k': // Play/pause video when 'K' is pressed
-            if (video.paused) {
-                video.play();
-            } else {
-                video.pause();
+        // Listen for the 'f' key to toggle fullscreen
+        if (event.key === 'f' || event.key === 'F') {
+            const iframe = document.querySelector('#player');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) { // Firefox
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari, Opera
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) { // IE/Edge
+                iframe.msRequestFullscreen();
             }
-            break;
-        case 'f':
-            if (!document.fullscreenElement) {
-                video.requestFullscreen();
-            } 
-        case 'e':
-            document.exitFullscreen();
-            break;
-        
-        default:
-            break;
-    }
-});
+        }
+    });
+}
 
+// loading
+document.addEventListener("DOMContentLoaded", function () {
+    // Wait for the entire page to be fully loaded
+    window.addEventListener("load", function () {
+        // Hide the loader
+        document.getElementById("loader").style.display = "none";
+
+        // Display the content
+        document.getElementById("content").style.display = "block";
+    });
+});
