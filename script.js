@@ -30,6 +30,25 @@ $(function () {
     });
 });
 
+//video
+
+var isPlaying = false;
+
+document.addEventListener('keydown', function(event) {
+    // Check if the key pressed is 'K' (case insensitive)
+    if (event.key.toUpperCase() === 'P') {
+        var video = document.getElementById('fenix');
+
+        if (isPlaying) {
+            video.pause();
+        } else {
+            video.play();
+        }
+
+        // Update the playback state
+        isPlaying = !isPlaying;
+    }
+});
 
 //FullScreen
 function enterFullScreen() {
