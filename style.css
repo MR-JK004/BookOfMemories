@@ -418,16 +418,12 @@ h2{
 
 #page3{
     border: 3px solid black;
-    padding-bottom: 50px;
+    padding-bottom: 285px;
     border-radius: 10px;
+    padding-top: 100px;
 }
 
-#page3 img{
-    width: 90%;
-    height: 40%;
-    animation: scaleUp 1s ease-in;
-    transition: transform 0.3s ease-in-out;
-}
+
 #page4{
     border: 3px solid black;
     padding-bottom: 0px;
@@ -802,7 +798,9 @@ img {
     color: #555;
   }
   
-
+#video-container{
+    margin-left: 20px;
+}
 
 
 
